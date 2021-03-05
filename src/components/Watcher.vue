@@ -1,7 +1,9 @@
 <template>
   <div class="hello">
-    <button>Click me to order Pizza</button>
+    <button @click="getPizza">Click me to order Pizza</button>
     <h2>Where is my Pizza?</h2>
+    <h2>{{orderStatus}}</h2>
+    <p v-if="orderSubmitted">{{orderSubmitted}}</p>
   </div>
 </template>
 
@@ -16,7 +18,14 @@ export default {
   }, 
     methods:{
       getPizza() {
+        this.orderStatus = "🍕"
+      }
+    }, 
+    watch: {
+      orderStatus() {
+        this.orderSubmitted = "your order was submitted"
 
+        setTimeout(() => this.orderSubmitted = null, 1000)
       }
     }
 }
